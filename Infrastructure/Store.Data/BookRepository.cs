@@ -8,14 +8,21 @@ namespace Store.Data
     {
         private readonly Book[] books = new[]
         {
-            new Book(1, "Art Of Programming"),
-            new Book(2, "Refactoring"),
-            new Book(3, "C Programming Language"),
+            new Book(1,"ISBN 12312-12312", "D. Knut", "Art Of Programming"),
+            new Book(2,"ISBN 12312-12311","M. Fowler", "Refactoring"),
+            new Book(3,"ISBN 12312-12313","Kernighan", "C Programming Language"),
         };
 
-        public Book[] GetBooksByTitle(string titlePart)
+        public Book[] GetBooksByIsbn(string isbn)
         {
-            return books.Where(book => book.Title.Contains(titlePart)).ToArray();
+            return books.Where(x => x.Isbn == isbn).ToArray();
+        }
+
+        public Book[] GetBooksByTitleOrAuthor(string query)
+        {
+            return books.Where(book => book.Title.Contains(query) 
+                                    || book.Author.Contains(query))
+                                           .ToArray();
         }
     }
 }
