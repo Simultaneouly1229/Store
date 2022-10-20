@@ -1,0 +1,10 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = @Model.Title;
+}
+
+<h1>@Model.Title</h1>
+<p><b>@Model.Author</b></p>
+<p>@Model.Description</p>
+<p>Price <b>@Model.Price</b></p>
