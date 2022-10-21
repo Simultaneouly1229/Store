@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Book-store "Library"</title>
+    <title>@ViewData["Title"] - inook-store "Library"</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -11,10 +11,28 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Book-store "Library"</a>
-            <form class="form_inline my-4 my-lg-0" action="@Url.Action("Index", "Search")" method="get">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="title or author"/>
+            <form class="form-inline my-2 my-lg-0" action="@Url.Action("Index", "Search")" method="get">
+                <input class="form-control mr-sm-2" type="search" name="query" placeholder="title or author" />
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
+            <span class="navbar-text ml-auto">  
+                @{
+                    Cart cart;
+                    if(!Context.Session.TryGetCart(out cart))
+                    {
+                        cart = new Cart();
+                    }
+
+                    if (cart.Items.Count == 0)
+                    {
+                        @:Empty cart
+                    }
+                    else
+                    {
+                        @cart.Items.Count @:items worth @cart.Amount
+                    }
+                }
+            </span>
         </nav>
     </header>
     <div class="container">
